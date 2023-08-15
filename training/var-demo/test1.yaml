@@ -1,0 +1,14 @@
+---
+- name: test vars
+  hosts: dev
+  vars_files:
+    - vars/vars.yaml
+  vars:
+    - name: mike
+    - age:  24
+  tasks:
+    - name: demo vars
+      debug:
+        msg: this is {{ name}}, he is {{ age }}, groups is {{group}}, lead is {{leader}}
+        #msg: "{{ name }} age is {{ age }}"
+    

@@ -1,0 +1,9 @@
+- name: get cpu idle
+  script: get_cpu_idle.sh
+  register: res_cpu_idle
+  ignore_errors: yes
+
+- debug:
+    msg: "{{res_cpu_idle.stdout_lines}}"
+
+

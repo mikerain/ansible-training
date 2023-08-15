@@ -1,0 +1,17 @@
+---
+- name: yum demo
+  gather_facts: false
+  hosts: bastion
+  tasks:
+
+  - name: all yum installed
+    yum:
+      name: 
+        - httpd
+        - httpd-tools
+        - httpd-filesystem
+      state: present
+  
+ 
+    
+ 

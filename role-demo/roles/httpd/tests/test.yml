@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    HTTP_PORT: 8080
+  roles:
+    - httpd

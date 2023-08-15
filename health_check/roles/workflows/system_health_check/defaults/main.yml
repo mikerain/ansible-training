@@ -1,0 +1,22 @@
+hc_list: 
+  - cpu
+  - mem
+  - swap
+  - release
+  - runlevel
+  - firewalld
+  - selinux
+  - timezone
+  - datetime
+  - language
+  - zombie
+  - process
+  - uptime
+  - disks
+  - inode
+  - kdump
+  - network
+  - chrony
+  - umask
+  - ulimit
+  - helloworld

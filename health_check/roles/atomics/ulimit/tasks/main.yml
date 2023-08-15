@@ -1,0 +1,40 @@
+---
+- name: get ulimit_core_soft
+  script: get_ulimit_core_soft.sh
+  register: res_ulimit_core_soft
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_ulimit_core_soft.stdout_lines }}"
+
+- name: get ulimit_nofile_soft
+  script: get_ulimit_nofile_soft.sh
+  register: res_ulimit_nofile_soft
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_ulimit_nofile_soft.stdout_lines }}"
+
+- name: get ulimit_nofile_hard
+  script: get_ulimit_nofile_hard.sh
+  register: res_ulimit_nofile_hard
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_ulimit_nofile_hard.stdout_lines }}"
+
+- name: get ulimit_nproc_soft
+  script: get_ulimit_nproc_soft.sh
+  register: res_ulimit_nproc_soft
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_ulimit_nproc_soft.stdout_lines }}"
+
+- name: get ulimit_stacksize_hard
+  script: get_ulimit_stacksize_hard.sh
+  register: res_ulimit_stacksize_hard
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_ulimit_stacksize_hard.stdout_lines }}"

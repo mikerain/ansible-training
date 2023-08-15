@@ -1,0 +1,10 @@
+---
+- name: test valut
+  hosts: localhost
+
+  tasks:
+  - name: copy vars to tmp
+    copy:
+      src: vars.yml
+      dest: /tmp/vars.yml
+    

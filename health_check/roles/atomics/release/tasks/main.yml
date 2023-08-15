@@ -1,0 +1,7 @@
+- name: get system release
+  script: get_release.sh
+  register: res_release
+  ignore_errors: yes
+
+- debug: 
+    msg: "{{ res_release.stdout_lines }}"

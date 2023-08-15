@@ -1,0 +1,7 @@
+- name: get datetime
+  script: get_datetime.sh
+  register: res_datetime
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_datetime.stdout_lines }}"

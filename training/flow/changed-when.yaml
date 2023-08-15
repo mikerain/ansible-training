@@ -1,0 +1,14 @@
+---
+- name: demo notify and hanlder
+  hosts: localhost
+  tasks:
+    - name: change httpd config
+      lineinfile: 
+        path: /etc/httpd/conf/httpd.conf
+        line: "#test for conf"
+      #changed_when: true
+
+    - name: debug disply
+      debug:
+        msg: "debug info"
+      

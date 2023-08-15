@@ -1,0 +1,26 @@
+---
+- name: command demo
+  hosts: bastion
+  tasks: 
+  - name: put content into file
+    lineinfile:
+      path: /tmp/test.txt
+      line: "#!/bin/bash"
+      create: yes
+      mode: 755
+
+  - name: command test , will fail
+    command:
+      cmd: cat /tmp/test.txt |grep xxx
+    ignore_errors: true
+    
+  - name: shell test, will success
+    shell:
+      cmd:  cat /tmp/test.txt |grep  bash
+   
+  - name: script test
+    script: /tmp/test.txt
+  
+ 
+    
+ 

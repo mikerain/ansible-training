@@ -1,0 +1,56 @@
+---
+- name: file in line demo
+  hosts: bastion
+  gather_facts: false
+  vars:
+    path: /tmp/abc
+    line: "192.168.1.99 foo.lab.net foo"
+  tasks:
+  - name: add line
+    lineinfile:
+      path: "{{path}}"
+      line: "{{line}}"
+      create: yes
+    when:
+    - op is defined
+    - op == "add" 
+
+
+  - name: remove line
+    lineinfile:
+      path: "{{path}}"
+      line: "{{line}}"
+      state: absent
+      backup: true
+    when:
+    - op is defined
+    - op == "remove"
+
+  - name: replace line
+    lineinfile:
+      path: "{{path}}"
+      regexp: "{{match_line}}" #'^SELINUX='
+      line: "{{line}}" #SELINUX=enforcing
+    when:
+    - op is defined
+    - op == "replace"
+
+  - name: add header
+    lineinfile:
+      path: "{{path}}"
+      line: "{{line}}"
+      insertbefore: BOF
+    when:
+    - op is defined
+    - op == "BOF"
+
+
+  - name: add tail
+    lineinfile:
+      path: "{{path}}"
+      line: "{{line}}"
+      insertafter: EOF
+    when:
+    - op is defined
+    - op == "EOF"
+

@@ -1,0 +1,31 @@
+- name: get network_route
+  script: get_network_route.sh
+  register: res_network_route
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_network_route.stdout_lines }}"
+
+- name: get network_timewait
+  script: get_network_timewait.sh
+  register: res_network_timewait
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_network_timewait.stdout_lines }}"
+
+- name: get network_ipv4
+  script: get_network_ipv4.sh
+  register: res_network_ipv4
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_network_ipv4.stdout_lines }}"
+
+- name: get network_ipv6
+  script: get_network_ipv6.sh
+  register: res_network_ipv6
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_network_ipv6.stdout_lines }}"

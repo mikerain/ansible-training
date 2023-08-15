@@ -1,0 +1,10 @@
+---
+- name: test privilege escalation
+  hosts: 127.0.0.1
+  
+  tasks:
+  - name: create a hosts backup file
+    copy:
+      src: /etc/hosts
+      dest: /etc/hosts-bk
+

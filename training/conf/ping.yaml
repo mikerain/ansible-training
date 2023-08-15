@@ -1,0 +1,9 @@
+---
+- name: test gather_facts
+  #gather_facts: false
+  hosts: all
+  
+  tasks:
+  - name: ping test
+    ping:
+

@@ -1,0 +1,7 @@
+<Location /server-info>
+    SetHandler server-info
+    Require all denied
+{% for ip in management_ips %}
+    Require ip {{ ip }}
+{% endfor %}
+</Location>

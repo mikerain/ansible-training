@@ -1,0 +1,17 @@
+---
+- name: test os var
+  hosts: all
+  vars_files:
+   - ["vars/os_defaults.yml", "vars/{{ansible_facts['distribution_major_version']}}.yml"]
+ 
+  tasks:
+    - debug: 
+        msg="vars/{{ansible_distribution_major_version}}.yml"
+      when: ansible_facts['distribution_major_version']  in ["8"]
+
+    - debug:
+        msg="vars/{{ansible_distribution_major_version}}.yml"
+      when: ansible_facts['distribution_major_version']  in ["7"]
+
+    - debug:
+        msg="{{cve_123}}"

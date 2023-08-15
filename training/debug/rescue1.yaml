@@ -1,0 +1,20 @@
+---
+- hosts: bastion
+  ignore_errors: false  #主动检查条件失败时,一定要设为false,不然会失效
+  tasks:
+  - name: Upgrade DB
+    block:
+    - name: upgrade the database
+      script: files/upgrade-success.sh
+        # files/upgrade-failed.sh
+
+    rescue:
+    - name: revert the database upgrade
+      script: files//revert-db.sh
+    always:
+    - name: always restart the database
+      debug:
+        msg: "run start mysql"
+
+
+

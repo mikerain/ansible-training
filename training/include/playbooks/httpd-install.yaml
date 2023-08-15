@@ -1,0 +1,12 @@
+---
+- name: install httpd rpms
+  package:
+    name: [httpd, httpd-tools]
+    state: present
+
+- name: Start and enable httpd service
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+

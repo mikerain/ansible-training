@@ -1,0 +1,19 @@
+---
+# tasks file for httpd
+- name: http yum
+  yum:
+    name: httpd
+    state: present
+
+- name: httpd conf file
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: restart httpd
+   
+- name: http service
+  service:
+    name: httpd
+    enabled: true
+    
+

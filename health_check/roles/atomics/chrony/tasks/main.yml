@@ -1,0 +1,31 @@
+- name: get chrony_active
+  script: get_chrony_active.sh
+  register: res_chrony_active
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_chrony_active.stdout_lines }}"
+
+- name: get chrony_enable
+  script: get_chrony_enable.sh
+  register: res_chrony_enable
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_chrony_enable.stdout_lines }}"
+
+- name: get chrony_source
+  script: get_chrony_source.sh
+  register: res_chrony_source
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_chrony_source.stdout_lines }}"
+
+- name: get chrony_tracking
+  script: get_chrony_tracking.sh
+  register: res_chrony_tracking
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_chrony_tracking.stdout_lines }}"

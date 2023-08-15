@@ -1,0 +1,17 @@
+---
+- name: demo notify and hanlder
+  hosts: localhost
+  tasks:
+    - name: change httpd config
+      lineinfile: 
+        path: /etc/httpd/conf/httpd.conf
+        line: "#test for conf"
+      notify: 
+        - restart httpd
+    
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted
+      

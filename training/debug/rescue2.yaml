@@ -1,0 +1,19 @@
+---
+- hosts: bastion
+  ignore_errors: false
+  tasks:
+  - name: Upgrade DB
+    block:
+    - name: upgrade the database
+      script: files/upgrade-failed.sh
+
+    rescue:
+    - name: revert the database upgrade
+      script: files/revert-db.sh
+    always:
+    - name: always restart the database
+      debug:
+        msg: "run start mysql"
+
+
+

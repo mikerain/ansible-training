@@ -1,0 +1,19 @@
+---
+- hosts: bastion
+  ignore_errors: false  #主动检查条件失败时,一定要设为false,不然会失效
+  tasks:
+  - name: calcuate number
+    shell:
+      cmd: echo '2+3'|bc
+    register: result
+
+  - name: check value
+    fail:
+      msg: "result is {{ result}} check fail"
+    when: result.stdout == "5"
+
+  - name: start httpd service
+    service:
+      name: httpd
+      state: started
+

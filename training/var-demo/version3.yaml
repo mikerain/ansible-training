@@ -1,0 +1,8 @@
+- hosts: bastion
+  tasks:
+  - name: check os
+    debug:
+      msg: os is {{ ansible_distribution }} {{ ansible_distribution_major_version }}
+    when: >
+      ansible_distribution == "RedHat" and
+      ansible_distribution_major_version == "8"

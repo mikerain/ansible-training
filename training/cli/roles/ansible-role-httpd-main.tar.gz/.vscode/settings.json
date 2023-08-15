@@ -1,0 +1,14 @@
+{
+    "editor.rulers": [80,120],
+    "files.associations": {
+        "**/*_vars/**/*.yml" : "ansible",
+        "**/*ansible*/**/*.yml" : "ansible",
+        "**/defaults/**/*": "ansible",
+        "**/handlers/*.yml" : "ansible",
+        "**/inventory/*/*": "ansible",
+        "**/playbooks/**/*.yml" : "ansible",
+        "**/roles/**/*.yml" : "ansible",
+        "**/tasks/**/*.yml" : "ansible",
+        "**/vars/**/*.yml": "ansible"
+    }
+}

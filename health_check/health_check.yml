@@ -1,0 +1,19 @@
+---
+- name: Linux System Health Check 
+  ignore_errors: True
+  ignore_unreachable: True
+  hosts:  all
+  tasks:
+  - name: set resource name
+    set_fact:
+      res_check_type: health_check 
+
+  roles:
+    - { role: workflows/system_health_check }
+  
+   
+- name: export to excel file
+  hosts: localhost
+  roles:
+    - { role: atomics/export2excel, type: hc }
+

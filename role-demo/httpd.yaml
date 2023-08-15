@@ -1,0 +1,29 @@
+---
+- name: config http service
+  hosts: all
+  #gather_facts: True
+  ignore_errors: True
+  ignore_unreachable: True
+
+  tasks:
+  - name: install httpd yum
+    yum:
+      name: httpd
+      state: present
+
+  - name: setup httpd conf file
+    template:
+      src: httpd.conf.j2
+      dest: /etc/httpd/conf/httpd.conf
+    notify: restart httpd
+   
+  - name: enable httpd service
+    service:
+      name: httpd
+      enabled: true
+ 
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted

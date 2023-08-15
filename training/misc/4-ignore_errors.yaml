@@ -1,0 +1,13 @@
+---
+- hosts: bastion
+  force_handlers: yes
+  tasks:
+  - name: start notapk service
+    service:
+      name: notapkg
+      state: started
+    ignore_erros: true
+
+  - name: exec command
+    command: /bin/true
+

@@ -1,0 +1,10 @@
+---
+- hosts: bastion
+  vars:
+    package: httpd
+  tasks:
+  - name: test failed when
+    yum:
+      name: "{{ package }}"
+      state: present
+    failed_when: package == "httpd"

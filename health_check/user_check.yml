@@ -1,0 +1,11 @@
+---
+- name: Linux User Check 
+  hosts: all
+  roles:
+    - { role: atomics/user }
+   
+- name: export to excel file
+  hosts: localhost
+  roles:
+    - { role: atomics/export2excel, type: uc }
+  

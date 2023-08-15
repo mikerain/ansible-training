@@ -1,0 +1,12 @@
+---
+- name: file demo
+  gather_facts: false
+  hosts: bastion
+  tasks:
+  - name: Create a directory if it does not exist
+    file:
+      path: "{{path}}"
+      state: directory
+      mode: '0755'
+    
+ 

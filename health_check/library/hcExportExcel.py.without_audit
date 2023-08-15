@@ -1,0 +1,119 @@
+#!/usr/bin/env  python
+
+import q
+import os
+from openpyxl import Workbook,load_workbook
+from datetime import datetime
+from ansible.module_utils.basic import *
+
+class WriteExcel(object):
+
+    def __init__(self):
+        self.wb = Workbook()
+        self.ws = self.wb.active
+        self.ws.title = "default"
+
+    def set_sheetname(self, worksheet, sheename):
+        worksheet.title = sheename
+
+    def set_title(self, worksheet, title):
+        worksheet.append(title)
+
+    def append(self, worksheet, row):
+        worksheet.append(row)
+
+    def save(self, filepath):
+        filedir = os.path.dirname(filepath)
+        if not os.path.exists(filedir):
+            os.mkdir(filedir)
+        self.wb.save(filepath)
+
+    def hosts(self, hostgroups, hostvars):
+        hosts = []
+        for hostgroup in hostgroups:
+            for host in list(hostvars.values())[0]['groups'][hostgroup]:
+                hosts.append(host)
+        return hosts
+
+    def result(self, host, hostvars, hclist):
+        results = []
+        if host in hostvars:
+            hostvar = hostvars[host]
+            keys = list(hostvar.keys())
+            for k in keys:
+                k_result = []
+                if k.startswith("res_"):
+                    item = k.replace('res_', '')
+                    flag = item.split('_')[0]
+                    if flag not in hclist:
+                        continue
+                    res = hostvar[k]
+                    if 'stdout' in res:
+                        stdout = res['stdout'].strip()
+                    if 'rc' in res:
+                        rc = res['rc']
+                        if rc == 0:
+                            rc = 'OK'
+                        elif rc == 1:
+                            rc = 'FAIL'
+                        else:
+                            rc = "ERROR"
+                    k_result.append(item)
+                    k_result.append(rc)
+                    k_result.append(stdout)
+                    results.append(k_result)
+        return results
+
+
+def write_sheet(hostgroups,hostvars,hclist,time,filepath):
+    title = ['host', 'item', 'rc', 'stdout', 'datetime']
+    excel = WriteExcel()
+    excel.set_title(excel.ws, title)
+    hosts = excel.hosts(hostgroups, hostvars)
+    q(hosts)
+    for host in hosts:
+        q(host)
+        results = excel.result(host, hostvars, hclist)
+        for result in results:
+            result.insert(0, host)
+            result.insert(len(result), str(time))
+            q(result)
+            excel.append(excel.ws, result)
+    q(filepath)
+    excel.save(filepath)
+
+
+def main():
+    module_args = dict(
+            hostvars=dict(type='dict', required=True),
+            hostgroups=dict(type='list', required=True),
+            resultfile=dict(type='str', required=True),
+            hclist=dict(type='list', required=True),
+            )
+
+    module = AnsibleModule(
+            argument_spec=module_args,
+            supports_check_mode=True,
+            no_log=True,
+
+            )
+
+    result = dict(
+            changed=False,
+            message={}
+            )
+
+    hostvars = module.params['hostvars']
+    hostgroups = module.params['hostgroups']
+    resultfile = module.params['resultfile']
+    hclist = module.params['hclist']
+
+    q(hclist)
+    time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    q(time)
+    write_sheet(hostgroups, hostvars, hclist, time, resultfile)
+
+    result['changed'] = True
+    module.exit_json(**result)
+
+main()

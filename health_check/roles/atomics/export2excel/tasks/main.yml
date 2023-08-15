@@ -1,0 +1,39 @@
+- name: set log path
+  set_fact:
+    hc_excel_path: "{{result_dir}}/system-check-{{lookup('pipe','date +%Y%m%d%H%M%S')}}.xlsx"
+    cc_excel_path: "{{result_dir}}/compliance-check-{{lookup('pipe','date +%Y%m%d%H%M%S')}}.xlsx"
+    uc_excel_path: "{{result_dir}}/user-check-{{lookup('pipe','date +%Y%m%d%H%M%S')}}.xlsx"
+
+- name: export result to excel file
+  hcExportExcel:
+    hostvars: "{{hostvars}}"
+    hostgroups: "{{hostgroups|default('all')}}"
+    resultfile: "{{hc_excel_path}}"
+    hclist: "{{hc_list}}"
+  delegate_to: localhost
+  run_once: yes
+  when: type == "hc"
+
+- name: export result to excel file
+  ccExportExcel:
+    hostvars: "{{hostvars}}"
+    hostgroups: "{{hostgroups|default('all')}}"
+    resultfile: "{{cc_excel_path}}"
+    hclist: "{{hc_list}}"
+    ccdict: "{{cc_dict}}"
+  delegate_to: localhost
+  run_once: yes
+  when: type == "cc"
+
+
+- name: export result to excel file
+  ucExportExcel:
+    hostvars: "{{hostvars}}"
+    hostgroups: "{{hostgroups|default('all')}}"
+    resultfile: "{{uc_excel_path}}"
+    uclist: "{{uc_list}}"
+  delegate_to: localhost
+  run_once: yes
+  when: type == "uc"
+
+

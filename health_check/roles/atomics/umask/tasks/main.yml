@@ -1,0 +1,7 @@
+- name: get umask
+  script: get_umask.sh
+  register: res_umask
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_umask.stdout_lines }}"

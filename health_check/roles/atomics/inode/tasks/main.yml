@@ -1,0 +1,7 @@
+- name: get inode
+  script: get_inode.sh
+  register: res_inode
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_inode.stdout_lines }}"

@@ -1,0 +1,40 @@
+---
+- name: block in file  demo
+  hosts: bastion
+  gather_facts: false
+  vars:
+    path: /tmp/abc
+    block: |
+      222
+      333
+      444
+  tasks:
+  - name: add lines
+    blockinfile:
+      path: "{{path}}"
+      block: "{{block}}"
+      create: yes
+      #marker: "{marker} xxx"
+      
+    when:
+    - op is defined
+    - op == "add" 
+
+  - name: remove lines by absent
+    blockinfile:
+      path: "{{path}}"
+      block: "{{block}}"
+      state: absent
+
+    when:
+    - op is defined
+    - op == "remove"
+
+  - name: remove lines by marker
+    blockinfile:
+      path: "{{path}}"
+      block: ""
+    when:
+    - op is defined
+    - op == "removeblock"
+

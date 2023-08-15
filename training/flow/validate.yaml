@@ -1,0 +1,22 @@
+---
+- hosts: bastion
+  tasks:
+    - name: yum install 
+      yum:
+        name: httpd
+        state: present
+
+    - name: conf file modify
+      lineinfile:
+         path: /etc/httpd/conf/httpd.conf
+         line: test 123
+         state: present
+         validate: apachectl -t -f %s
+    
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted
+
+          
+      

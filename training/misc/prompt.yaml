@@ -1,0 +1,11 @@
+---
+- hosts: bastion
+  vars_prompt:
+  - name: HTTP_PORT
+    prompt: provide the HTTP PORT
+
+  tasks:
+  - name: display http_port debug
+    debug:
+      msg: http port is  {{HTTP_PORT}}
+

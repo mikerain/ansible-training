@@ -1,0 +1,34 @@
+---
+- name: command demo
+  hosts: bastion
+  gather_facts: false
+  ignore_errors: true
+  tasks:
+  - name: ls
+    command: ls
+    args:
+      chdir: /root
+  
+  - name: touch
+    command: touch /tmp/abc
+    args:
+      creates: /tmp/abc
+
+  - name: mv
+    command: mv /tmp/abc /root
+    args:
+      removes: /tmp/abc
+
+
+  - name: test1
+    command: ls /root|grep awx
+
+
+  - name: test2
+    command: ls /root> log.txt
+
+
+  - name: test2
+    command: ls /root;ls /
+
+

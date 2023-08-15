@@ -1,0 +1,39 @@
+---
+- name: shell demo
+  hosts: bastion
+  gather_facts: false
+  ignore_errors: true
+  tasks:
+  - name: ls
+    shell: ls
+    args:
+      chdir: /root
+  
+  - name: touch
+    shell: touch /tmp/abc
+    args:
+      creates: /tmp/abc
+
+  - name: mv
+    shell: mv /tmp/abc /root
+    args:
+      removes: /tmp/abc
+
+
+  - name: test1
+    shell: ls /root|grep a
+
+
+  - name: test2
+    shell: ls /root> log.txt
+
+
+  - name: test3
+    shell: ls /root;ls /
+    register: res_result
+
+  - name: show result
+    debug:
+      msg: "{{res_result}}"
+
+

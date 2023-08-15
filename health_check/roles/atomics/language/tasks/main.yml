@@ -1,0 +1,7 @@
+- name: get language
+  script: get_language.sh
+  register: res_language
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_language.stdout_lines }}"

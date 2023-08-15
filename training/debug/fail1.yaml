@@ -1,0 +1,13 @@
+---
+- hosts: all
+  ignore_errors: false
+  #ignore_unreachable: false
+  tasks:
+  - name: find files
+    shell: ls /root|grep TTTTTT
+    register: res_result
+  - name: show find result
+    debug:
+      msg: "{{res_result}}"
+
+

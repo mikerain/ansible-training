@@ -1,0 +1,23 @@
+- name: get kdump_active
+  script: get_kdump_active.sh
+  register: res_kdump_active
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_kdump_active.stdout_lines }}"
+
+- name: get kdump_crashkernel
+  script: get_kdump_crashkernel.sh
+  register: res_kdump_crashkernel
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_kdump_crashkernel.stdout_lines }}"
+
+- name: get kdump_enable
+  script: get_kdump_enable.sh
+  register: res_kdump_enable
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_kdump_enable.stdout_lines }}"

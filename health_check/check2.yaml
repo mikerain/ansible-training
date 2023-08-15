@@ -1,0 +1,40 @@
+---
+- name: Linux System Health Check 
+  ignore_errors: True
+  ignore_unreachable: True
+  hosts:  all
+  tasks:
+  - name: set resource name
+    set_fact:
+      res_check_type: health_check 
+
+  roles:
+    - { role: atomics/cpu,       when: "'cpu'       in hc_list" }
+    - { role: atomics/mem,       when: "'mem'       in hc_list" }
+    - { role: atomics/swap,      when: "'swap'      in hc_list" }
+    - { role: atomics/release,   when: "'release'   in hc_list" }
+    - { role: atomics/runlevel,  when: "'runlevel'  in hc_list" }
+    - { role: atomics/firewalld, when: "'firewalld' in hc_list" }
+    - { role: atomics/selinux,   when: "'selinux'   in hc_list" }
+    - { role: atomics/timezone,  when: "'timezone'  in hc_list" }
+    - { role: atomics/datetime,  when: "'datetime'  in hc_list" }
+    - { role: atomics/language,  when: "'language'  in hc_list" }
+    - { role: atomics/zombie,    when: "'zombie'    in hc_list" }
+    - { role: atomics/process,   when: "'process'   in hc_list" } 
+    - { role: atomics/uptime,    when: "'uptime'    in hc_list" }
+    - { role: atomics/disks,     when: "'disks'     in hc_list" }
+    - { role: atomics/inode,     when: "'inode'     in hc_list" }
+    - { role: atomics/kdump,     when: "'kdump'     in hc_list" }
+    - { role: atomics/network,   when: "'network'   in hc_list" }
+    - { role: atomics/chrony,    when: "'chrony'    in hc_list" }
+    - { role: atomics/umask,     when: "'umask'     in hc_list" }
+    - { role: atomics/ulimit,    when: "'ulimit'    in hc_list" }
+
+
+  
+   
+- name: export to excel file
+  hosts: localhost
+  roles:
+    - { role: atomics/export2excel, type: hc }
+

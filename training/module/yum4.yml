@@ -1,0 +1,16 @@
+---
+- name: yum demo
+  gather_facts: false
+  hosts: bastion
+  vars:
+    pks: [httpd,httpd-tools,httpd-filesystem]
+
+  tasks:
+  - name: all yum installed
+    yum:
+      name: "{{pks}}"
+      state: present
+  
+ 
+    
+ 

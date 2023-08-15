@@ -1,0 +1,17 @@
+---
+- name: template demo
+  hosts: bastion
+  gather_facts: true
+  tasks:
+  - name: copy httpd.conf file
+    template:
+      src: httpd.conf.j2
+      dest: /tmp/httpd.conf
+  - name: show httpd port
+    debug:
+      msg: "{{HTTP_PORT}}"
+    when:
+    - HTTP_PORT is defined
+
+
+

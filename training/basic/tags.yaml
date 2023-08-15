@@ -1,0 +1,28 @@
+---
+- name: setup default dns server
+  hosts: bastion
+  vars:
+  - CONN: eth0
+  - DNSSERVER: 127.0.0.1
+   
+  tasks:
+    - name: add dns1 into conn
+      nmcli:
+        type: ethernet
+        conn_name: "{{ CONN }}"
+        dns4:
+          - "{{ DNSSERVER }}"
+        state: present
+      tags:
+        - nmcli
+        - never
+   
+    - name: change /etc/resolv.conf
+      lineinfile:
+        path: /etc/resolv.conf
+        insertafter: '^search '
+        line: nameserver {{ DNSSERVER }}
+      tags:
+        - resolve
+        - file
+        - never

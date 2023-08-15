@@ -1,0 +1,7 @@
+- name: get uptime
+  script: get_uptime.sh
+  register: res_uptime
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_uptime.stdout_lines }}"

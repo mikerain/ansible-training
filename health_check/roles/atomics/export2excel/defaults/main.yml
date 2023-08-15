@@ -1,0 +1,72 @@
+result_dir: /opt/ansible_projects/results
+
+hc_list: 
+  - cpu
+  - mem
+  - swap
+  - release
+  - runlevel
+  - firewalld
+  - selinux
+  - timezone
+  - datetime
+  - language
+  - zombie
+  - process
+  - uptime
+  - disks
+  - inode
+  - kdump
+  - network
+  - chrony
+  - umask
+  - ulimit
+
+
+cc_dict:
+  compare_type: 
+    cpu_idle: "70"
+    mem_usage: "20"
+    swap_usage: "20"
+    zombie: "0"
+    network_timewait: "0"
+    chrony_tracking: "5"
+  equal_type:
+    runlevel: "N 5"
+    timezone: "Shanghai (CST, +0800)"
+    language: "en_US.UTF-8"
+    selinux: "Disabled"
+    umask: "0022"
+    firewalld_active: "inactive"
+    firewalld_enable: "disabled"
+    kdump_active: "active"
+    kdump_enable:  "enabled"
+    chrony_active: "active"
+    chrony_enable: "enabled"
+  exists_type:
+    kdump_crashkernel: "crashkernel"
+    chrony_source: "^*"
+  disk_type:
+    disks_usage: "20"
+    inode: "20"
+
+uc_list: 
+  - name
+  - uid
+  - gid
+  - homedir
+  - user_type
+  - shell
+  - is_nologin
+  - is_privileged
+  - encryption_mode
+  - desc
+  - last_change_time
+  - password
+  - shadow_pw
+  - min_interval_time
+  - max_intrval_time
+  - warning_time
+  - inactivity_time
+  - become_invalid_time
+

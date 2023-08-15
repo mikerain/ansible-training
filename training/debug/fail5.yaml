@@ -1,0 +1,16 @@
+---
+- hosts: bastion
+  ignore_errors: false  #主动检查条件失败时,一定要设为false,不然会失效
+  force_handlers: yes
+  vars:
+    key: qxu
+  tasks:
+  - name: check file or dir existing
+    shell:
+      cmd: ls -la  /root
+    register: result
+    failed_when: "'{{key}}' not in result.stdout"
+
+
+
+

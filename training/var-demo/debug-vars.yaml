@@ -1,0 +1,22 @@
+- name: test
+  hosts: localhost
+
+  tasks:
+  - name: Write to file
+    copy:
+      dest: /tmp/fool.txt
+      content: |
+        xxxx
+        yyyy
+    register: display_file
+
+  - name: debug file
+    debug:
+      var: display_file
+      verbosity: 2
+  - debug: var=ansible_fqdn
+
+  - name: print all vars
+    debug: var=ansible_facts
+    when: 0>1
+

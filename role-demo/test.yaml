@@ -1,0 +1,9 @@
+---
+- name: config httpd service
+  hosts: all
+  #gather_facts: True
+  ignore_errors: True
+  ignore_unreachable: True
+
+  roles:
+  - { role: httpd }

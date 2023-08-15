@@ -1,0 +1,14 @@
+---
+- name: include tasks demo
+  hosts: bastion
+  gather_facts: false
+  ignore_errors: true
+  tasks:
+  - include_tasks: playbooks/disable-selinux.yaml
+  - include_tasks: playbooks/stop-firewalld.yaml
+  - include_tasks: playbooks/httpd-install.yaml
+
+
+
+
+

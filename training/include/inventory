@@ -1,0 +1,3 @@
+[bastion]
+localhost  HTTPD_PORT=3000
+#10.72.93.134

@@ -1,0 +1,39 @@
+- name: get disks usage
+  script: get_disks_usage.sh
+  register: res_disks_usage
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_disks_usage.stdout_lines }}"
+
+- name: get disks_pv
+  script: get_disks_pv.sh
+  register: res_disks_pv
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_disks_pv.stdout_lines }}"
+
+- name: get disks_vg
+  script: get_disks_vg.sh
+  register: res_disks_vg
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_disks_vg.stdout_lines }}"
+
+- name: get disks_lv
+  script: get_disks_lv.sh
+  register: res_disks_lv
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_disks_lv.stdout_lines }}"
+
+- name: get disks_mount
+  script: get_disks_mount.sh
+  register: res_disks_mount
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_disks_mount.stdout_lines }}"

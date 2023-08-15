@@ -1,0 +1,29 @@
+---
+- hosts: bastion
+  tasks:
+  - name: install httpd block
+    block:
+      - name: yum install 
+        yum:
+          name: httpd
+          state: present
+      #- name: fail task
+      #  fail:
+      #    msg: this task failed
+
+    rescue:
+         
+      - name: rescue task, revert the conf file
+        lineinfile:
+          path: /etc/httpd/conf/httpd.conf
+          line: test 123
+          state: absent
+    
+    always:
+      - name: always restart httpd
+        service:
+          name: httpd
+          state: restarted
+
+          
+      

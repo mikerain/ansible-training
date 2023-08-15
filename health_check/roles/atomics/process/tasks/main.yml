@@ -1,0 +1,23 @@
+- name: get process
+  script: get_process.sh
+  register: res_process
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_process.stdout_lines}}"
+
+- name: get process_cpu_top10
+  script: get_process_cpu_top10.sh
+  register: res_process_cpu_top10
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_process_cpu_top10.stdout_lines }}"
+
+- name: get process_mem_top10
+  script: get_process_mem_top10.sh
+  register: res_process_mem_top10
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_process_mem_top10.stdout_lines }}"

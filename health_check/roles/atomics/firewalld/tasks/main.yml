@@ -1,0 +1,15 @@
+- name: get firewalld active
+  script: get_firewalld_active.sh
+  register: res_firewalld_active
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_firewalld_active.stdout_lines }}"
+
+- name: get firewalld enable
+  script: get_firewalld_enable.sh
+  register: res_firewalld_enable
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_firewalld_enable.stdout_lines }}"

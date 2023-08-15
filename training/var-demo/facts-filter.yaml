@@ -1,0 +1,19 @@
+---
+- name: no gather_facts
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: register test
+      command: 'ls'
+      register: res_ls
+    
+    - debug:
+        msg: "ls result: {{res_ls}}"
+    - debug:
+        msg: "ls result stdout: {{res_ls['stdout']}}"
+ 
+    - debug:
+        msg: "all info: {{ hostvars[inventory_hostname] }}"
+    - debug:
+        msg: "company: {{hostvars[inventory_hostname]['company'] }}"
+

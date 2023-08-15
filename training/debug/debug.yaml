@@ -1,0 +1,18 @@
+---
+- hosts: bastion
+  tasks:
+  - name: show uptime
+    shell: /usr/bin/uptime
+    register: result
+   
+  - name: debug 1
+    debug:
+      msg: 
+        - this is debug 
+        - uptime is {{ result.stdout }}
+
+  - name: debug 2
+    debug:
+      verbosity: 2
+      msg: verbosity 2 debug uptime {{ result.stdout }}
+

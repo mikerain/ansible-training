@@ -1,0 +1,10 @@
+---
+
+- name: copy demo
+  hosts: all  # ....
+  tasks:
+    - name: copy resolv.conf
+      copy:
+        src: files/resolv.conf
+        dest: /tmp/resolv.conf
+        force: yes

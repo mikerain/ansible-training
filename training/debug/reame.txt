@@ -1,0 +1,35 @@
+
+# 以下两个参数的用法 
+ignore_errors: false
+ignore_unreachable: false
+
+
+ansible-playbook  fail1.yaml  #有失败任务,就会失败
+echo $?
+
+ansible-playbook  fail2.yaml  #0 全部忽略,成功
+echo $?
+
+ansible-playbook  fail3.yaml  #有不可过主机就会失败
+echo $?
+
+
+#主动检查后,判断是否失败,ignore_errors: false
+
+ansible-playbook fail4.yaml
+
+#使用failed_when
+ansible-playbook fail5.yaml -e key=xyz
+ansible-playbook fail5.yaml -e key=root
+
+#使用rescue
+ansible-playbook rescue1.yaml  #不用rescue
+ansible-playbook rescue2.yaml  #触发rescue
+
+
+#debug 一个v就是一个verbosity
+#不执行第 2个debug
+ansible-playbook debug.yaml 
+
+#执行第2个debug 
+ansible-playbook debug.yaml  -vv

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+get_process() {
+	process=$(top -n 1 |grep "Task" | awk '{print $10}')
+	echo $process
+}
+
+get_process

@@ -1,0 +1,7 @@
+- name: get zombie
+  script: get_zombie.sh
+  register: res_zombie
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_zombie.stdout_lines }}"

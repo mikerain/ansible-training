@@ -1,0 +1,23 @@
+- name: get swap total
+  script: get_swap_total.sh
+  register: res_swap_total
+  ignore_errors: yes
+
+- debug:
+    msg: "{{res_swap_total.stdout_lines}}"
+
+- name: get swap used
+  script: get_swap_used.sh
+  register: res_swap_used
+  ignore_errors: yes
+
+- debug:
+    msg: "{{res_swap_used.stdout_lines}}"
+
+- name: get swap usage
+  script: get_swap_usage.sh
+  register: res_swap_usage
+  ignore_errors: yes
+
+- debug:
+    msg: "{{res_swap_usage.stdout_lines}}"

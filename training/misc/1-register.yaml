@@ -1,0 +1,17 @@
+---
+- name: demo registry
+  hosts: localhost
+  tasks:
+    - name: yum install
+      shell:
+        cmd: echo {{item}}|bc
+      loop:
+        - 2+3
+        - 2*3
+      register: install_results
+    
+    - name: show result
+      debug: 
+        msg: "{{ item.stdout }}"
+      loop: "{{ install_results.results }}"
+

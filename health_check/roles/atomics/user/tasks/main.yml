@@ -1,0 +1,7 @@
+- name: get user info
+  userBasicInfo:
+  register: res_user_info
+  ignore_errors: yes
+
+- debug: 
+    msg: "{{ res_user_info }}"

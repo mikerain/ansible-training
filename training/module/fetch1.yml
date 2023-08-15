@@ -1,0 +1,19 @@
+---
+- name: Run tasks on local and remote hosts
+  hosts: localhost  # ....
+  tasks:
+    - name: Create directory on local host
+      file:
+        path: /tmp/dns
+        state: directory
+
+- name: Run tasks on local and remote hosts
+  hosts: all  # ....
+  ignore_errors: true
+  ignore_unreachable: true
+  tasks:
+    - name: Fetch /etc/resolv.conf
+      fetch:
+        src: /etc/resolv.conf
+        dest: /tmp/dns/
+        flat: yes

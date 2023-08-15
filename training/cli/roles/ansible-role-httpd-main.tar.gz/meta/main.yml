@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Jan Bouma
+  description: Installs and configures Apache HTTP Server
+  company: Acropia.nl
+
+  license: MIT
+  min_ansible_version: "2.12"
+
+  platforms:
+    - name: "EL"
+      versions:
+        - "8"
+
+  galaxy_tags: []
+
+dependencies: []

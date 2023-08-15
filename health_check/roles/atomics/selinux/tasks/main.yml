@@ -1,0 +1,7 @@
+- name: get selinux
+  script: get_selinux.sh
+  register: res_selinux
+  ignore_errors: yes
+
+- debug: 
+    msg: "{{ res_selinux.stdout_lines }}"

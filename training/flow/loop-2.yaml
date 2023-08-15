@@ -1,0 +1,10 @@
+---
+- name: Install the required packages on the web server
+  hosts: bastion
+  tasks:
+  - name: Install the packages
+    yum:
+      name:
+        - httpd
+        - httpd-tools
+      state: present

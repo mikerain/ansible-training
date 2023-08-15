@@ -1,0 +1,7 @@
+- name: get timezone
+  script: get_timezone.sh
+  register: res_timezone
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_timezone.stdout_lines }}"

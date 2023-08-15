@@ -1,0 +1,8 @@
+---
+- name: test vars
+  hosts: prod
+  tasks:
+    - name: demo vars
+      debug:
+        msg: this is {{ name}}, he is {{ age }}, groups is {{group}}, lead is {{leader}}, company is {{ company }}
+    

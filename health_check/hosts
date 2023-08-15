@@ -1,0 +1,11 @@
+[ansible_server]
+127.0.0.1
+[rhel7_servers]
+
+[rhel8_servers]
+127.0.0.1
+
+[rhel_servers:children]
+rhel7_servers
+rhel8_servers
+

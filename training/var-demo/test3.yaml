@@ -1,0 +1,14 @@
+---
+- name: test var in dev
+  hosts: dev
+  tasks:
+    - debug: msg="test leader,var={{leader}}"
+    #- debug: msg="test varall, var={{varall}}"
+
+- name: test var in all
+  hosts: all
+  tasks:
+    - debug: msg="test leader,var={{leader}}"
+    - debug: msg="test company,var={{company}}"
+   # - debug:
+   #     msg: "{{cmd_env}}"

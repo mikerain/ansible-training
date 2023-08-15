@@ -1,0 +1,94 @@
+---
+- name: Install Apache HTTP Server (httpd)
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
+
+- name: Install mod_ssl
+  ansible.builtin.dnf:
+    name: mod_ssl
+    state: present
+
+- name: Enable and start httpd service
+  ansible.builtin.systemd:
+    name: httpd
+    enabled: true
+    state: started
+
+- name: Template httpd.conf
+  ansible.builtin.template:
+    src: etc/httpd/httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Template mod_info configuration
+  ansible.builtin.template:
+    src: etc/httpd/conf.d/mod_info.conf.j2
+    dest: /etc/httpd/conf.d/mod_info.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Template mod_status configuration
+  ansible.builtin.template:
+    src: etc/httpd/conf.d/mod_status.conf.j2
+    dest: /etc/httpd/conf.d/mod_status.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Copy base modules configuration
+  ansible.builtin.copy:
+    src: etc/httpd/conf.modules.d/00-base.conf
+    dest: /etc/httpd/conf.modules.d/00-base.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Copy dav modules configuration
+  ansible.builtin.copy:
+    src: etc/httpd/conf.modules.d/00-dav.conf
+    dest: /etc/httpd/conf.modules.d/00-dav.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Copy lua modules configuration
+  ansible.builtin.copy:
+    src: etc/httpd/conf.modules.d/00-lua.conf
+    dest: /etc/httpd/conf.modules.d/00-lua.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Copy proxy modules configuration
+  ansible.builtin.copy:
+    src: etc/httpd/conf.modules.d/00-proxy.conf
+    dest: /etc/httpd/conf.modules.d/00-proxy.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Copy cgi modules configuration
+  ansible.builtin.copy:
+    src: etc/httpd/conf.modules.d/01-cgi.conf
+    dest: /etc/httpd/conf.modules.d/01-cgi.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Permit inbound traffic for HTTP
+  ansible.posix.firewalld:
+    zone: public
+    service: http
+    permanent: true
+    state: enabled
+
+- name: Permit inbound traffic for HTTPS
+  ansible.posix.firewalld:
+    zone: public
+    service: https
+    permanent: true
+    state: enabled

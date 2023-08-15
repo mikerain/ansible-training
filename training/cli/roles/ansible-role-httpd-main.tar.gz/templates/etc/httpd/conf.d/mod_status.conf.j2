@@ -1,0 +1,10 @@
+<IfModule mod_status.c>
+    ExtendedStatus On
+    <Location /server-status>
+        SetHandler server-status
+        Require all denied
+{% for ip in management_ips %}
+        Require ip {{ ip }}
+{% endfor %}
+    </Location>
+</IfModule>

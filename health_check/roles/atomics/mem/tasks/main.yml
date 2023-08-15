@@ -1,0 +1,23 @@
+- name: get mem total
+  script: get_mem_total.sh
+  register: res_mem_total
+  ignore_errors: yes
+
+- debug:
+    msg: "{{res_mem_total.stdout_lines}}"
+
+- name: get mem used
+  script: get_mem_used.sh
+  register: res_mem_used
+  ignore_errors: yes
+
+- debug:
+    msg: "{{res_mem_used.stdout_lines}}"
+
+- name: get mem usage
+  script: get_mem_usage.sh
+  register: res_mem_usage
+  ignore_errors: yes
+
+- debug:
+    msg: "{{res_mem_usage.stdout_lines}}"

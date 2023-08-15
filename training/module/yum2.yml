@@ -1,0 +1,13 @@
+- name: yum demo
+  hosts: bastion
+  gather_facts: false
+
+  tasks:
+  - name: Install the packages
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - httpd
+      - httpd-tools
+      - httpd-filesystem

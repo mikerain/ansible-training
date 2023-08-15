@@ -1,0 +1,8 @@
+- name: get helloworld
+  #script: get_helloworld.sh
+  shell: echo "helloworld"
+  register: res_helloworld
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ res_helloworld.stdout_lines }}"

@@ -1,0 +1,7 @@
+- name: get runlevel
+  script: get_runlevel.sh
+  register: res_runlevel
+  ignore_errors: yes
+
+- debug: 
+    msg: "{{ res_runlevel.stdout_lines }}"

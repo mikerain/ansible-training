@@ -1,0 +1,11 @@
+---
+- name: file demo
+  gather_facts: false
+  hosts: bastion
+  tasks:
+  - name: delete file or dir
+    file:
+      path: /tmp/training
+      state: absent
+    
+ 

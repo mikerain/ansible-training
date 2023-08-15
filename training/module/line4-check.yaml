@@ -1,0 +1,21 @@
+---
+- name: file in line demo
+  hosts: bastion
+  gather_facts: false
+  vars:
+    path: /tmp/abc
+    line: "192.168.1.99 foo.lab.net foo"
+  tasks:
+  - name: Check if lines exist in the file
+    lineinfile:
+      path: "{{ path }}"
+      line: "{{ line }}"
+      state: present
+    check_mode: yes
+    register: res_lines_found
+
+  - name: Handle task success or failure
+    debug:
+      msg: "{{res_lines_found}}"
+    failed_when: res_lines_found.changed is true
+

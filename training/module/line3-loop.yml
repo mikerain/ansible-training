@@ -1,0 +1,36 @@
+---
+- name: file in line demo
+  hosts: bastion
+  gather_facts: false
+  vars:
+    path: /tmp/abc
+    lines:
+    - 444
+    - 555
+  tasks:
+  - name: insert lines
+    lineinfile:
+      path: "{{path}}"
+      line: "{{item}}"
+      state: present
+    loop: "{{ lines.split('\\n') }}"
+  
+    when:
+    - op is defined
+    - op == 'add'
+
+
+  - name: delete lines
+    lineinfile:
+      path: "{{path}}"
+      line: "{{item}}"
+      state: absent
+    loop: "{{ removelines }}"
+  
+    when:
+    - op is defined
+    - op == 'remove'
+
+
+
+
