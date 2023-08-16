@@ -13,7 +13,7 @@
   
    
 - name: export to excel file
-  hosts: 10.72.93.134
+  hosts: localhost # 10.72.93.134
   roles:
     - { role: atomics/export2excel, type: hc }
 
