@@ -12,8 +12,8 @@
     - { role: workflows/system_health_check }
   
    
-#- name: export to excel file
-#  hosts: localhost
-#  roles:
-#    - { role: atomics/export2excel, type: hc }
+- name: export to excel file
+  hosts: 10.72.93.134
+  roles:
+    - { role: atomics/export2excel, type: hc }
 

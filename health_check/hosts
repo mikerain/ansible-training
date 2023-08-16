@@ -9,3 +9,5 @@
 rhel7_servers
 rhel8_servers
 
+[awx]
+10.72.93.134
