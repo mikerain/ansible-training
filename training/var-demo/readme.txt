@@ -8,7 +8,8 @@ ansible-playbook test1.yaml
 ansible-playbook test2.yaml
 
 
-
+#setup var
+ansible localhost -m setup
 
 
 下面是从小到大的优先级。 大的优先级可以覆盖小的优先级。

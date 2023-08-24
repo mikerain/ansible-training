@@ -4,7 +4,7 @@
   gather_facts: false
   ignore_errors: true
   tasks:
-  - import_tasks: playbooks/disable-selinux.yaml
+  #- import_tasks: playbooks/disable-selinux.yaml
   - import_tasks: playbooks/stop-firewalld.yaml
   - import_tasks: playbooks/httpd-install.yaml
 
