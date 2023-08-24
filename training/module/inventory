@@ -3,6 +3,7 @@
 #127.0.0.1  group=rd leader=mars
 localhost 
 127.0.0.1
+192.168.43.132
 
 [dev:vars]
 leader=mike

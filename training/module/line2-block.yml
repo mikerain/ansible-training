@@ -8,6 +8,7 @@
       222
       333
       444
+      445
   tasks:
   - name: add lines
     blockinfile:
