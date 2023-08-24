@@ -21,3 +21,5 @@ ansible-playbook check2.yaml -e hc_list='["cpu","mem"]'
 - name: export to excel file
   hosts: localhost # 10.72.93.134
 
+自定义的模块,如果需要在awx安装pip package,不一定能安装成功,因为是在docker中运行的实例,需要在社区中查找方案;或者使用url模块,在其他主机上回写,而不是使用自定义模块
+在tower中可以正常安装pip package.
