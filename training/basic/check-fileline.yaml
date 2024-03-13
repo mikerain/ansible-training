@@ -1,0 +1,16 @@
+---
+- hosts: all
+
+  tasks:
+    - name: Check if a line exists in a file
+      lineinfile:
+        path: /tmp/my.conf
+        line: 'port=3306'
+        state: present
+      register: line_check
+      failed_when:  line_check.rc != 0
+
+    - name: Print message if line not found
+      debug:
+        msg: "The line 'the line you want to check' does not exist in the file, {{line_check}}"
+      when: line_check.rc != 0

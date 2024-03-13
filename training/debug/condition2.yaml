@@ -1,0 +1,18 @@
+---
+- name: Install Apache HTTP Server 
+  hosts: all
+  tasks:
+    - name: Install Apache HTTP Server On RHEL8
+      package:
+        name: httpd
+        state: present
+      when:
+        - ansible_distribution == "RedHat"
+        - ansible_distribution_major_version == "8"
+
+    - name: Install Apache HTTP Server on Ubuntu
+      apt:
+        name: apache2
+        state: present
+      when:
+        - ansible_distribution == "Ubuntu"

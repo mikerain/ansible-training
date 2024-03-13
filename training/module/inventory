@@ -15,7 +15,7 @@ localhost
 192.168.0.64
 
 [bastion]
-localhost  HTTP_PORT=3000
+localhost  HTTP_PORT=3001
 
 [yum-httpd]
 

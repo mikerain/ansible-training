@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Copy a file to /tmp/
+      copy:
+        src: my.conf
+        dest: /tmp/my.conf
+        mode: 0644

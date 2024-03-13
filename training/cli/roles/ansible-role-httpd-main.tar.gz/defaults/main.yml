@@ -1,5 +1,0 @@
----
-httpd_listen: 80
-httpd_user: apache
-httpd_group: apache
-httpd_server_admin: root@localhost

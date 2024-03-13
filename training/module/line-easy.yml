@@ -1,0 +1,11 @@
+---
+- name: file in line demo
+  hosts: bastion
+  gather_facts: false
+  tasks:
+  - name: add line
+    lineinfile:
+      path: "/tmp/abc"
+      line: "192.168.1.99 foo.lab.net foo"
+      create: yes
+

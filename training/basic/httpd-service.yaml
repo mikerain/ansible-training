@@ -1,0 +1,16 @@
+---
+- name: setup http service
+  hosts: dev
+  tasks:
+    - name: Install Apache HTTP Server
+      yum:
+        name: httpd
+        state: present
+      #when: ansible_os_family == "RedHat"
+
+    - name: Start and enable Apache HTTP Server
+      systemd:
+        name: httpd
+        state: started
+        enabled: yes
+      #when: ansible_os_family == "RedHat"

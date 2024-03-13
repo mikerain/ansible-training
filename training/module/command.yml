@@ -28,7 +28,7 @@
     command: ls /root> log.txt
 
 
-  - name: test2
+  - name: test3
     command: ls /root;ls /
 
 

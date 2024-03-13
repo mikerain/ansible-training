@@ -1,0 +1,13 @@
+---
+- name: Install Apache HTTP Server on Red Hat 8
+  hosts: all
+  tasks:
+    - name: Install Apache HTTP Server
+      become: yes
+      package:
+        name: httpd
+        state: present
+      when:
+        - ansible_distribution == "RedHat"
+        - ansible_distribution_major_version == "8"
+

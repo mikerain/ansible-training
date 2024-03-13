@@ -1,7 +1,8 @@
 ---
 - name: test gather_facts
-  gather_facts: true
-  hosts: "{{target}}"
+  #gather_facts: true
+  #hosts: "{{target}}"
+  hosts: 127.0.0.1
   
   tasks:
   - name: ping test

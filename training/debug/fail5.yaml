@@ -3,7 +3,7 @@
   ignore_errors: false  #主动检查条件失败时,一定要设为false,不然会失效
   force_handlers: yes
   vars:
-    key: qxu
+    key: qxuxxx
   tasks:
   - name: check file or dir existing
     shell:

@@ -1,7 +1,7 @@
 ---
 - name: file demo
   gather_facts: false
-  hosts: "{{target}}"
+  hosts: 127.0.0.1
   tasks:
   - name: Create a directory if it does not exist
     file:

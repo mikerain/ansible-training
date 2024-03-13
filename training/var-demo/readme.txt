@@ -53,5 +53,5 @@ ansible-playbook  version1.yaml
 ansible-playbook  version3.yaml
 
 
-#registry and facts vars的读取
+#registry and facts vars的读取, {{ hostvars[inventory_hostname] }}　显示所有主机的变量
 ansible-playbook facts-filter.yaml 

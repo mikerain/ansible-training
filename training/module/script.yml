@@ -6,5 +6,5 @@
   tasks:
   - name: run test script
     script: files/test.sh
-  - name: run failed script
-    script: files/test2.sh
+  #- name: run failed script
+  #  script: files/test2.sh

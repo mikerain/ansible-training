@@ -1,10 +1,10 @@
----
-- name: test privilege escalation
+- name: Test privilege escalation
   hosts: 127.0.0.1
-  
+  #become: yes
+  #become_method: sudo
   tasks:
-  - name: create a hosts backup file
-    copy:
-      src: /etc/hosts
-      dest: /etc/hosts-bk
-
+    - name: Ensure a file exists with root privileges
+      file:
+        path: /etc/test.conf
+        state: touch
+      #become: yes

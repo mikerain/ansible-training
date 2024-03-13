@@ -2,9 +2,9 @@
 
 ansible-playbook service1.yml  #不需要重启 
 ansible-playbook service2.yml  #使用started,修改httpd.conf无法重启.使用restarted,每次都重启,不合理.
-ansible-playbook service3.yml  #文件修改才重启
+ansible-playbook service3.yml  #文件修改才重启,注意执行后changed的数量是e
 
-#yum install loop
+#yum install loop,以下个时间基本相同
 ansible-playbook yum1.yml
 ansible-playbook yum2.yml
 
@@ -16,19 +16,24 @@ ansible-playbook yum4.yml
 
 #file and tags, conditional
 ansible-playbook file1.yml  #单一功能的建立
-ansible-playbook file2.yml -e path=/tmp/abc  #变量复用的建立
-ansible-playbook file3.yml  #单一功能的删除
+ansible-playbook file2.yml -e path=/tmp/abc  #变量复用的建立, ls /tmp/abc to test
+ansible-playbook file3.yml  #单一功能的删除,删除或danger操作，不要变量化，易出运维事故
 
-ansible-playbook file4.yml -e path=/tmp/abc #全部功能,但是全部执行,所以不可用
+ansible-playbook file4.yaml -e path=/tmp/abc #全部功能,但是全部执行,最后就删除前面的操作
+
+ansible-playbook file5-tags.yml  #不执行
+ansible-playbook file5-tags.yml  -e path=/tmp/abc  #不执行
 
 ansible-playbook file5-tags.yml  -e path=/tmp/abc --tags dir  #使用tags,区分不同功能的用途, 
 ansible-playbook file5-tags.yml  -e path=/tmp/abc --tags file
 ansible-playbook file5-tags.yml  -e path=/tmp/abc --tags remove
-ansible-playbook file5-tags.yml  -e path=/tmp/abc  #不执行
-
 
 #lineinfile 
 
+# easy sample
+ansible-playbook line-easy.yml
+
+#可复用的playbook
 # remove line
 ansible-playbook line1.yml -e line=xxxx -e op=remove
 
@@ -117,7 +122,7 @@ command模块示例：
 
 
 shell 模块
-shell 模块，远程执行命令模块，和command模块类似，区别在于shell模块通过/bin/bash程序处理命令
+shell 模块，远程执行命令模块，和command模块类似，区别在于shell模块通过/bin/bash程序处理命令, shell执行的命令要在目标机存在
 支持以下操作
  ansible bastion -m shell -a 'chdir=/root/ ls|grep awx'  
  ansible bastion -m shell -a 'chdir=/root/ ls>log.txt'  
@@ -125,10 +130,10 @@ shell 模块，远程执行命令模块，和command模块类似，区别在于s
 
 
 script 模块
-script 模块用于远程执行脚本，脚本存放在ansible主机本地，不需要拷贝到远程主机
+script 模块用于远程执行文件，不限于shell，文件存放在ansible主机本地，不需要拷贝到远程主机，执行中会自动copy到目标主机上
 
 #运行一下
- ansible-playbook command.yml
+ ansible-playbook command.yml   #会失败后三个，
  ansible-playbook shell.yml
 
  ansible-playbook script.yml
@@ -142,10 +147,14 @@ fetch文件到本地/tmp/dns/，收集各主机文件，再进行二次处理，
 使用两台主机测试
 #运行以下，注意只在本地运行的任务，注意此任务如果有多个主机时，文件会覆盖
 ansible-playbook  fetch1.yml
+# ls /tmp/dns/
+
 
 #运行以下，文件名加个主机地址
 ansible-playbook  fetch2.yml
 ansible-playbook  fetch2.yml
+
+# ls /tmp/dns/
 
 
 
@@ -166,6 +175,11 @@ template,可以使用变量，解决copy或file中不容易解决的部分内容
 #hosts中自动加入本机的主机名,检查/tmp/hosts
  ansible-playbook template1.yml
 
+#显示变量的来源
+ansible 127.0.0.1 -m setup|grep hostname
+
 # httpd.conf中的port根据各主机中配置的HTTP_PORT的变量有所不同, check /tmp/httpd.conf
  ansible-playbook template2.yml
 
+#more /tmp/http.conf　to check
+#change inventory , PORT定义重新运行template2.yml to test
