@@ -1,0 +1,12 @@
+---
+- name: host var demo
+  gather_facts: false
+  hosts: "{{ target }}"
+  tasks:
+  - name: Create a directory if it does not exist
+    file:
+      path: /tmp/training
+      state: directory
+      mode: '0755'
+    
+ 
