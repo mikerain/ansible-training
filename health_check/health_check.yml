@@ -13,7 +13,8 @@
   
    
 - name: export to excel file
-  hosts: localhost # 10.72.93.134
+  #hosts: localhost # for local run test
+  hosts: 10.72.93.134  #for awx run test , cannot use localhost in awx
   roles:
     - { role: atomics/export2excel, type: hc }
 
