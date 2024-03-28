@@ -1,0 +1,10 @@
+---
+- name: hang task test
+  hosts: all
+
+  tasks:
+  - name: hang ...
+    async: 60
+    poll: 60
+    pause:
+      seconds: 600

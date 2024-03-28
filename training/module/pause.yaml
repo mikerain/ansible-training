@@ -1,0 +1,7 @@
+---
+- name: hang task test
+  hosts: all
+  tasks:
+  - name: hang ...
+    pause:
+      seconds: 600

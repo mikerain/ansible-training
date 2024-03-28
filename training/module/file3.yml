@@ -1,7 +1,7 @@
 ---
 - name: file demo
   gather_facts: false
-  hosts: bastion
+  hosts: "{{host}}"
   tasks:
   - name: delete file or dir
     file:

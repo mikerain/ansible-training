@@ -1,0 +1,17 @@
+---
+- name: Install, start and enable Apache HTTP Server
+  hosts:  127.0.0.1
+  become: yes  # To become root user
+
+  tasks:
+
+    - name: Start Apache HTTP Server
+      service:
+        name: httpd  # Service name for Apache HTTP Server
+        state: started  # Ensure the service is started
+
+    - name: Enable Apache HTTP Server to start on boot
+      service:
+        name: httpd  # Service name for Apache HTTP Server
+        enabled: yes  # Enable the service to start on boot
+
